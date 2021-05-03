@@ -26,4 +26,16 @@
         tools:layout_editor_absoluteX="78dp"
         tools:layout_editor_absoluteY="41dp" />
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="74dp"
+        tools:layout_editor_absoluteY="83dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="put in your text here" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
