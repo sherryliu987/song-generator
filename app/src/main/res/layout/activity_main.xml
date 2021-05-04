@@ -19,17 +19,23 @@
 
     <EditText
         android:id="@+id/editTextTextPersonName"
-        android:layout_width="240dp"
-        android:layout_height="42dp"
+        android:layout_width="264dp"
+        android:layout_height="90dp"
+        android:autofillHints=""
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/sherry_you_r_so_cool"
+        android:text="GenSong"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#F10A0A"
+        android:textSize="36sp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/textInputEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.233"
         tools:visibility="visible" />
 
     <com.google.android.material.textfield.TextInputEditText
