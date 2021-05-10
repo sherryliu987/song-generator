@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.text.BreakIterator;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // hello sherry
         TextView newtext = (TextView) findViewById(R.id.songText);
-        newtext.setText("YEET");
+        newtext.setText("Most recent song-text");
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.note1);
 
@@ -49,10 +50,20 @@ public class MainActivity extends AppCompatActivity {
         final EditText edit =  (EditText) findViewById(R.id.textInputEditText);
         String sequence = (String) edit.getText().toString();
         sequence = sequence.toLowerCase();
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), notes[(sequence.charAt(i) - 'a') % 2]);
-        mediaPlayer.start();
-        TextView seqtext = findViewById(R.id.songText);
-        seqtext.setText(sequence);
+        if (sequence.length()>0) {
+            TextView seqtext = findViewById(R.id.songText);
+            seqtext.setText(sequence);
+            for (int j=0; j<sequence.length(); j++) {
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), notes[(sequence.charAt(j) - 'a') % 2]);
+                mediaPlayer.start();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+
     }
 
 //    //hiiii
