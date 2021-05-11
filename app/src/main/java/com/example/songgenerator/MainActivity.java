@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         TextView newtext = (TextView) findViewById(R.id.songText);
         newtext.setText("Most recent song-text");
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.note1);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.a);
 
 //        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 //            @Override
