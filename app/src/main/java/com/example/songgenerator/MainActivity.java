@@ -15,8 +15,9 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
 
     String sequence = "";
-    int[] notes = {R.raw.note1, R.raw.note2};
+    int[] notes = {R.raw.c,R.raw.d,R.raw.e,R.raw.f,R.raw.g,R.raw.a,R.raw.b};
     int i = 0;
+    char[] notenames = {'C', 'D', 'E', 'F', 'G', 'A','B'};
 
     MediaPlayer mediaPlayer;
 
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 mediaPlayer.reset();
                 i++;
                 if(i < sequence.length()){
-                    mediaPlayer = MediaPlayer.create(getApplicationContext(), notes[(sequence.charAt(i) - 'a') % 2]);
+                    mediaPlayer = MediaPlayer.create(getApplicationContext(), notes[(sequence.charAt(i) - 'a') % 7]);
                     mediaPlayer.start();
                 }
             }
@@ -45,23 +46,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void playSong(View view){
+    public void playSong(View view) {
         // TextView newtext = (TextView) findViewById(R.id.songText);
         final EditText edit =  (EditText) findViewById(R.id.textInputEditText);
         String sequence = (String) edit.getText().toString();
         sequence = sequence.toLowerCase();
         if (sequence.length()>0) {
             TextView seqtext = findViewById(R.id.songText);
-            seqtext.setText(sequence);
+            // seqtext.setText(sequence);
+            String actualNotes = "";
             for (int j=0; j<sequence.length(); j++) {
-                mediaPlayer = MediaPlayer.create(getApplicationContext(), notes[(sequence.charAt(j) - 'a') % 2]);
+                mediaPlayer = MediaPlayer.create(getApplicationContext(), notes[Math.abs(sequence.charAt(j) - 'a') % 7]);
                 mediaPlayer.start();
+                actualNotes+=notenames[Math.abs(sequence.charAt(j) - 'a') % 7];
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
                     Thread.currentThread().interrupt();
                 }
             }
+            seqtext.setText(actualNotes);
         }
 
     }
