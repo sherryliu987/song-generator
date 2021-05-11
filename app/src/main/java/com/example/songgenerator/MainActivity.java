@@ -15,9 +15,9 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends AppCompatActivity {
 
     String sequence = "";
-    int[] notes = {R.raw.c,R.raw.d,R.raw.e,R.raw.f,R.raw.g,R.raw.a,R.raw.b};
+    int[] notes = {R.raw.c,R.raw.d,R.raw.e,R.raw.f,R.raw.g,R.raw.a,R.raw.b, R.raw.bird_honk};
     int i = 0;
-    char[] notenames = {'C', 'D', 'E', 'F', 'G', 'A','B'};
+    char[] notenames = {'C', 'D', 'E', 'F', 'G', 'A','B', '!'};
 
     MediaPlayer mediaPlayer;
 
@@ -31,19 +31,24 @@ public class MainActivity extends AppCompatActivity {
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.note1);
 
-        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mediaPlayer) {
-                System.out.println("FINISHED PLAYING DA NOTEEEEE");
-                mediaPlayer.reset();
-                i++;
-                if(i < sequence.length()){
-                    mediaPlayer = MediaPlayer.create(getApplicationContext(), notes[(sequence.charAt(i) - 'a') % 7]);
-                    mediaPlayer.start();
-                }
-            }
-        });
+//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mediaPlayer) {
+//                System.out.println("FINISHED PLAYING DA NOTEEEEE");
+//                mediaPlayer.reset();
+//                i++;
+//                if(i < sequence.length()){
+//                    mediaPlayer = MediaPlayer.create(getApplicationContext(), notes[(sequence.charAt(i) - 'a') % 7]);
+//                    mediaPlayer.start();
+//                }
+//            }
+//        });
 
+    }
+
+    public void pauseSong(View view){
+        System.out.println("HELOOOOOOOOOOOOO????????????");
+        mediaPlayer.pause();
     }
 
     public void playSong(View view) {
@@ -56,9 +61,15 @@ public class MainActivity extends AppCompatActivity {
             // seqtext.setText(sequence);
             String actualNotes = "";
             for (int j=0; j<sequence.length(); j++) {
-                mediaPlayer = MediaPlayer.create(getApplicationContext(), notes[Math.abs(sequence.charAt(j) - 'a') % 7]);
+                double randNum = Math.random();
+                if(randNum < 0.1){
+                    mediaPlayer = MediaPlayer.create(getApplicationContext(), notes[7]);
+                    actualNotes+=notenames[7];
+                }else{
+                    mediaPlayer = MediaPlayer.create(getApplicationContext(), notes[Math.abs(sequence.charAt(j) - 'a') % 7]);
+                    actualNotes+=notenames[Math.abs(sequence.charAt(j) - 'a') % 7];
+                }
                 mediaPlayer.start();
-                actualNotes+=notenames[Math.abs(sequence.charAt(j) - 'a') % 7];
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
