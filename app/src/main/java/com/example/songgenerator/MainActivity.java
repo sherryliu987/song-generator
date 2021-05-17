@@ -2,9 +2,12 @@ package com.example.songgenerator;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.view.inputmethod.InputMethodSubtype;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -25,40 +28,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // hello sherry
         TextView newtext = (TextView) findViewById(R.id.songText);
         newtext.setText("Most recent song-text");
 
         mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.a);
 
-//        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//            @Override
-//            public void onCompletion(MediaPlayer mediaPlayer) {
-//                System.out.println("FINISHED PLAYING DA NOTEEEEE");
-//                mediaPlayer.reset();
-//                i++;
-//                if(i < sequence.length()){
-//                    mediaPlayer = MediaPlayer.create(getApplicationContext(), notes[(sequence.charAt(i) - 'a') % 7]);
-//                    mediaPlayer.start();
-//                }
-//            }
-//        });
-
-    }
-
-    public void pauseSong(View view){
-        System.out.println("HELOOOOOOOOOOOOO????????????");
-        mediaPlayer.pause();
     }
 
     public void playSong(View view) {
-        // TextView newtext = (TextView) findViewById(R.id.songText);
         final EditText edit =  (EditText) findViewById(R.id.textInputEditText);
+        mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.a);
         String sequence = (String) edit.getText().toString();
         sequence = sequence.toLowerCase();
         if (sequence.length()>0) {
             TextView seqtext = findViewById(R.id.songText);
-            // seqtext.setText(sequence);
             String actualNotes = "";
             for (int j=0; j<sequence.length(); j++) {
                 double randNum = Math.random();
@@ -79,13 +62,10 @@ public class MainActivity extends AppCompatActivity {
             seqtext.setText(actualNotes);
         }
 
-    }
+        mediaPlayer.stop();
+        mediaPlayer.release();
+        mediaPlayer = null;
 
-//    //hiiii
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        mediaPlayer.start();
-//        }
+    }
 
 }
